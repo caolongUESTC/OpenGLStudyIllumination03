@@ -24,7 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
 }
 
 - (void)viewDidLayoutSubviews {

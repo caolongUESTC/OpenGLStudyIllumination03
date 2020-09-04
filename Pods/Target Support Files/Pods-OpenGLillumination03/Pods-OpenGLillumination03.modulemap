@@ -1,0 +1,6 @@
+framework module Pods_OpenGLillumination03 {
+  umbrella header "Pods-OpenGLillumination03-umbrella.h"
+
+  export *
+  module * { export * }
+}

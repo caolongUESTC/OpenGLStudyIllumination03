@@ -1,0 +1,28 @@
+{
+  "name": "OCOpenGLMath",
+  "version": "0.0.1",
+  "summary": "A short description of OCOpenGLMath.",
+  "description": "OC重写glm部分功能",
+  "homepage": "http://www.github.com/OCOpenGLMath",
+  "license": "MIT",
+  "authors": {
+    "caolong": "caolong.bj02@bytedance.com"
+  },
+  "source": {
+    "git": "http://www.github.com/OCOpenGLMath.git",
+    "tag": "0.0.1"
+  },
+  "public_header_files": "Classes/**/*.h",
+  "platforms": {
+    "osx": null,
+    "ios": null,
+    "tvos": null,
+    "watchos": null
+  },
+  "subspecs": [
+    {
+      "name": "util",
+      "source_files": "Classes/util/*.{h,m}"
+    }
+  ]
+}

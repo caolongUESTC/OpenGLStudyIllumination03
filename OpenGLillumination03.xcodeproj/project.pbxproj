@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		64EE99BDAFDEDF346E4976DC /* Pods_OpenGLillumination03.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 974BD1E9453A59B3ADF3D05C /* Pods_OpenGLillumination03.framework */; };
 		C468F29C25021FDD00C526C5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C468F29B25021FDD00C526C5 /* AppDelegate.m */; };
 		C468F29F25021FDD00C526C5 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C468F29E25021FDD00C526C5 /* SceneDelegate.m */; };
 		C468F2A225021FDD00C526C5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C468F2A125021FDD00C526C5 /* ViewController.m */; };
@@ -14,12 +15,13 @@
 		C468F2A725021FDE00C526C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C468F2A625021FDE00C526C5 /* Assets.xcassets */; };
 		C468F2AA25021FDE00C526C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C468F2A825021FDE00C526C5 /* LaunchScreen.storyboard */; };
 		C468F2AD25021FDE00C526C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C468F2AC25021FDE00C526C5 /* main.m */; };
-		C468F2B6250223B300C526C5 /* verrex.vsh in Resources */ = {isa = PBXBuildFile; fileRef = C468F2B5250223B300C526C5 /* verrex.vsh */; };
+		C468F2B6250223B300C526C5 /* vertex.vsh in Resources */ = {isa = PBXBuildFile; fileRef = C468F2B5250223B300C526C5 /* vertex.vsh */; };
 		C468F2B8250223D900C526C5 /* fragment.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C468F2B7250223D900C526C5 /* fragment.fsh */; };
 		C468F2BC2502243600C526C5 /* OpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = C468F2BB2502243600C526C5 /* OpenGLView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		974BD1E9453A59B3ADF3D05C /* Pods_OpenGLillumination03.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenGLillumination03.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C468F29725021FDD00C526C5 /* OpenGLillumination03.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenGLillumination03.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C468F29A25021FDD00C526C5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C468F29B25021FDD00C526C5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -32,10 +34,12 @@
 		C468F2A925021FDE00C526C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C468F2AB25021FDE00C526C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C468F2AC25021FDE00C526C5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C468F2B5250223B300C526C5 /* verrex.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = verrex.vsh; sourceTree = "<group>"; };
+		C468F2B5250223B300C526C5 /* vertex.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = vertex.vsh; sourceTree = "<group>"; };
 		C468F2B7250223D900C526C5 /* fragment.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = fragment.fsh; sourceTree = "<group>"; };
 		C468F2BA2502243600C526C5 /* OpenGLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLView.h; sourceTree = "<group>"; };
 		C468F2BB2502243600C526C5 /* OpenGLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenGLView.m; sourceTree = "<group>"; };
+		D31B48430C6EBD1758E6A929 /* Pods-OpenGLillumination03.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenGLillumination03.debug.xcconfig"; path = "Target Support Files/Pods-OpenGLillumination03/Pods-OpenGLillumination03.debug.xcconfig"; sourceTree = "<group>"; };
+		E245DAB2CC2109A3CD3795D2 /* Pods-OpenGLillumination03.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenGLillumination03.release.xcconfig"; path = "Target Support Files/Pods-OpenGLillumination03/Pods-OpenGLillumination03.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,17 +47,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64EE99BDAFDEDF346E4976DC /* Pods_OpenGLillumination03.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A646FBC4ED0D0E8A21A3B37 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D31B48430C6EBD1758E6A929 /* Pods-OpenGLillumination03.debug.xcconfig */,
+				E245DAB2CC2109A3CD3795D2 /* Pods-OpenGLillumination03.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		C468F28E25021FDD00C526C5 = {
 			isa = PBXGroup;
 			children = (
 				C468F29925021FDD00C526C5 /* OpenGLillumination03 */,
 				C468F29825021FDD00C526C5 /* Products */,
+				0A646FBC4ED0D0E8A21A3B37 /* Pods */,
+				DE18FA339A152E8201F22F2A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -88,7 +104,7 @@
 		C468F2B42502239800C526C5 /* Shader */ = {
 			isa = PBXGroup;
 			children = (
-				C468F2B5250223B300C526C5 /* verrex.vsh */,
+				C468F2B5250223B300C526C5 /* vertex.vsh */,
 				C468F2B7250223D900C526C5 /* fragment.fsh */,
 			);
 			path = Shader;
@@ -103,6 +119,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		DE18FA339A152E8201F22F2A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				974BD1E9453A59B3ADF3D05C /* Pods_OpenGLillumination03.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -110,9 +134,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C468F2B025021FDE00C526C5 /* Build configuration list for PBXNativeTarget "OpenGLillumination03" */;
 			buildPhases = (
+				A0E1E51B471264C1C5FC96F6 /* [CP] Check Pods Manifest.lock */,
 				C468F29325021FDD00C526C5 /* Sources */,
 				C468F29425021FDD00C526C5 /* Frameworks */,
 				C468F29525021FDD00C526C5 /* Resources */,
+				2A52DE9E7348CE306ED1953A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -161,7 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C468F2AA25021FDE00C526C5 /* LaunchScreen.storyboard in Resources */,
-				C468F2B6250223B300C526C5 /* verrex.vsh in Resources */,
+				C468F2B6250223B300C526C5 /* vertex.vsh in Resources */,
 				C468F2A725021FDE00C526C5 /* Assets.xcassets in Resources */,
 				C468F2B8250223D900C526C5 /* fragment.fsh in Resources */,
 				C468F2A525021FDD00C526C5 /* Main.storyboard in Resources */,
@@ -169,6 +195,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2A52DE9E7348CE306ED1953A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OpenGLillumination03/Pods-OpenGLillumination03-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OpenGLillumination03/Pods-OpenGLillumination03-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OpenGLillumination03/Pods-OpenGLillumination03-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A0E1E51B471264C1C5FC96F6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OpenGLillumination03-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C468F29325021FDD00C526C5 /* Sources */ = {
@@ -255,7 +323,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -307,7 +375,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -317,10 +385,18 @@
 		};
 		C468F2B125021FDE00C526C5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D31B48430C6EBD1758E6A929 /* Pods-OpenGLillumination03.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VW2B7K4C4M;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					GLES_SILENCE_DEPRECATION,
+				);
 				INFOPLIST_FILE = OpenGLillumination03/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -333,10 +409,13 @@
 		};
 		C468F2B225021FDE00C526C5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E245DAB2CC2109A3CD3795D2 /* Pods-OpenGLillumination03.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VW2B7K4C4M;
 				INFOPLIST_FILE = OpenGLillumination03/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

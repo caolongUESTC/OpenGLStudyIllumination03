@@ -1,0 +1,18 @@
+PODS:
+  - OCOpenGLMath (0.0.1):
+    - OCOpenGLMath/util (= 0.0.1)
+  - OCOpenGLMath/util (0.0.1)
+
+DEPENDENCIES:
+  - OCOpenGLMath (from `./module/OCOpenglMath/`)
+
+EXTERNAL SOURCES:
+  OCOpenGLMath:
+    :path: "./module/OCOpenglMath/"
+
+SPEC CHECKSUMS:
+  OCOpenGLMath: c6f8d1cd0965e8ffc87faca0986eb7f62fd792d0
+
+PODFILE CHECKSUM: 2c7e5c195734fde63e9737d06dce4ebdcff588ad
+
+COCOAPODS: 1.9.3
