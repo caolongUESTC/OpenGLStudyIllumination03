@@ -14,6 +14,9 @@
 		C468F2A725021FDE00C526C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C468F2A625021FDE00C526C5 /* Assets.xcassets */; };
 		C468F2AA25021FDE00C526C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C468F2A825021FDE00C526C5 /* LaunchScreen.storyboard */; };
 		C468F2AD25021FDE00C526C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C468F2AC25021FDE00C526C5 /* main.m */; };
+		C468F2B6250223B300C526C5 /* verrex.vsh in Resources */ = {isa = PBXBuildFile; fileRef = C468F2B5250223B300C526C5 /* verrex.vsh */; };
+		C468F2B8250223D900C526C5 /* fragment.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C468F2B7250223D900C526C5 /* fragment.fsh */; };
+		C468F2BC2502243600C526C5 /* OpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = C468F2BB2502243600C526C5 /* OpenGLView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,10 @@
 		C468F2A925021FDE00C526C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C468F2AB25021FDE00C526C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C468F2AC25021FDE00C526C5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C468F2B5250223B300C526C5 /* verrex.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = verrex.vsh; sourceTree = "<group>"; };
+		C468F2B7250223D900C526C5 /* fragment.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = fragment.fsh; sourceTree = "<group>"; };
+		C468F2BA2502243600C526C5 /* OpenGLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLView.h; sourceTree = "<group>"; };
+		C468F2BB2502243600C526C5 /* OpenGLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenGLView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +68,8 @@
 		C468F29925021FDD00C526C5 /* OpenGLillumination03 */ = {
 			isa = PBXGroup;
 			children = (
+				C468F2B92502242300C526C5 /* View */,
+				C468F2B42502239800C526C5 /* Shader */,
 				C468F29A25021FDD00C526C5 /* AppDelegate.h */,
 				C468F29B25021FDD00C526C5 /* AppDelegate.m */,
 				C468F29D25021FDD00C526C5 /* SceneDelegate.h */,
@@ -74,6 +83,24 @@
 				C468F2AC25021FDE00C526C5 /* main.m */,
 			);
 			path = OpenGLillumination03;
+			sourceTree = "<group>";
+		};
+		C468F2B42502239800C526C5 /* Shader */ = {
+			isa = PBXGroup;
+			children = (
+				C468F2B5250223B300C526C5 /* verrex.vsh */,
+				C468F2B7250223D900C526C5 /* fragment.fsh */,
+			);
+			path = Shader;
+			sourceTree = "<group>";
+		};
+		C468F2B92502242300C526C5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C468F2BA2502243600C526C5 /* OpenGLView.h */,
+				C468F2BB2502243600C526C5 /* OpenGLView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,7 +161,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C468F2AA25021FDE00C526C5 /* LaunchScreen.storyboard in Resources */,
+				C468F2B6250223B300C526C5 /* verrex.vsh in Resources */,
 				C468F2A725021FDE00C526C5 /* Assets.xcassets in Resources */,
+				C468F2B8250223D900C526C5 /* fragment.fsh in Resources */,
 				C468F2A525021FDD00C526C5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -150,6 +179,7 @@
 				C468F29C25021FDD00C526C5 /* AppDelegate.m in Sources */,
 				C468F2AD25021FDE00C526C5 /* main.m in Sources */,
 				C468F29F25021FDD00C526C5 /* SceneDelegate.m in Sources */,
+				C468F2BC2502243600C526C5 /* OpenGLView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
