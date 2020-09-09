@@ -6,7 +6,7 @@
 //
 
 #import "OpenGLCompileUtil.h"
-#import <OpenGLES/ES2/gl.h>
+#import <OpenGLES/ES3/gl.h>
 
 @implementation OpenGLCompileUtil
 - (GLuint)loadShaders: (NSString *)vert fragment:(NSString *)frag {

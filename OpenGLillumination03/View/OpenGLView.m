@@ -9,7 +9,7 @@
 #import "OpenGLView.h"
 #import "OCOpenGLMath-umbrella.h"
 #import <GLKit/GLKit.h>
-#import <OpenGLES/ES2/glext.h>
+#import <OpenGLES/ES3/glext.h>
 
 @interface OpenGLView()
 @property (nonatomic, strong) EAGLContext *context;
@@ -33,6 +33,7 @@
         self.eaglLayer = (CAEAGLLayer *)self.layer;
         [OpenGLCommonUtil setupEAGLLayer:self.eaglLayer];
         self.context = [OpenGLCommonUtil generateGL2Context];
+        
     }
     return self;
 }
@@ -104,7 +105,7 @@
     //加载shader
     [self compileAndLink];
     for (int i = 0; i < 2 ; i++) {
-        float offsetX = i == 0 ? 0 : 1;
+        float offsetX = i == 0 ? -1 : 1;
         GLKMatrix4 model = GLKMatrix4Rotate(GLKMatrix4Translate(GLKMatrix4Identity, offsetX, 0, 0), 45*PI/180, 0, 1, 0);
         //发送数据到gpu
         [self postMessageToGPU:model];
@@ -141,28 +142,8 @@
 //3.数据发送。将数据从CPU -> GPU
 - (void)postMessageToGPU:(GLKMatrix4)modelMatrix {
     [self postVBOToGPU];
-    
-    //2.对shader里面的变量进行赋值。
-    GLuint modelLoc = glGetUniformLocation(self.programId, "model"); //模型矩阵变量
-    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, modelMatrix.m);
-
-    GLuint viewLoc = glGetUniformLocation(self.programId, "view");//观察矩阵变量
-    //观察矩阵可以通过lookat来创建
-    GLKMatrix4 vMatrix = GLKMatrix4MakeLookAt(0, 0, 10, 0, 0, 0, 0, 1, 0); //通过相同的视角来查看
-    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, vMatrix.m);
-
-    GLuint projectionLoc = glGetUniformLocation(self.programId, "projection"); //投影矩阵
-    GLKMatrix4 projection = GLKMatrix4MakePerspective(PI/4, self.frame.size.width / self.frame.size.height, 0.1, 100);
-    glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, projection.m);
-
-    //片段着色器 fsh
-    GLuint lightColorLoc = glGetUniformLocation(self.programId, "lightColor");
-    glUniform3f(lightColorLoc, 1.0, 0.5, 0.3);
-    GLuint objectColorLoc = glGetUniformLocation(self.programId, "objectColor");
-    glUniform3f(objectColorLoc, 1.0, 1.0, 1.0);
-    GLuint lightPosLoc = glGetUniformLocation(self.programId, "lightPos"); //光源距离
-    glUniform3f(lightPosLoc, 0, 0, 4);
-
+    [self postVshUniform:modelMatrix];
+    [self postFshUniform];
 }
 
 //postVBO
@@ -226,6 +207,40 @@
     GLuint normal = glGetAttribLocation(self.programId, "normal"); //
     glVertexAttribPointer(normal, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, (GLvoid *)(3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(normal);
+}
+
+//postVsh variable
+- (void)postVshUniform:(GLKMatrix4)modelMatrix {
+    //2.对shader里面的变量进行赋值。
+    GLuint modelLoc = glGetUniformLocation(self.programId, "model"); //模型矩阵变量
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, modelMatrix.m);
+    
+    bool isInvert;
+    GLKMatrix4 invertTransposeModel = GLKMatrix4Invert(modelMatrix, &isInvert);
+    invertTransposeModel = GLKMatrix4Transpose(invertTransposeModel);
+    GLuint modelInvertLoc = glGetUniformLocation(self.programId, "modelInvertTranspose");
+    glUniformMatrix4fv(modelInvertLoc, 1, GL_FALSE, invertTransposeModel.m);
+
+    GLuint viewLoc = glGetUniformLocation(self.programId, "view");//观察矩阵变量
+    //观察矩阵可以通过lookat来创建
+    GLKMatrix4 vMatrix = GLKMatrix4MakeLookAt(0, 0, 10, 0, 0, 0, 0, 1, 0); //通过相同的视角来查看
+    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, vMatrix.m);
+
+    GLuint projectionLoc = glGetUniformLocation(self.programId, "projection"); //投影矩阵
+    GLKMatrix4 projection = GLKMatrix4MakePerspective(PI/4, self.frame.size.width / self.frame.size.height, 0.1, 100);
+    glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, projection.m);
+}
+
+- (void)postFshUniform {
+    //片段着色器 fsh
+    GLuint lightColorLoc = glGetUniformLocation(self.programId, "lightColor");
+    glUniform3f(lightColorLoc, 1.0, 0.5, 0.3);
+    GLuint objectColorLoc = glGetUniformLocation(self.programId, "objectColor");
+    glUniform3f(objectColorLoc, 1.0, 1.0, 1.0);
+    GLuint lightPosLoc = glGetUniformLocation(self.programId, "lightPos"); //光源距离
+    glUniform3f(lightPosLoc, 12, 0, 4);
+    GLuint viewPosLoc = glGetUniformLocation(self.programId, "viewPos"); //观察者。
+    glUniform3f(viewPosLoc, 0, 0, 10);
 }
 
 - (void)glDrawPhoto {

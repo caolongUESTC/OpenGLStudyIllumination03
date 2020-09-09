@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <OpenGLES/ES2/gl.h>
+#import <OpenGLES/ES3/gl.h>
 
 NS_ASSUME_NONNULL_BEGIN
 static GLfloat PI = 3.1415926;

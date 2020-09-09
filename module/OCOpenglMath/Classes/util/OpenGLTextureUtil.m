@@ -6,7 +6,7 @@
 //
 
 #import "OpenGLTextureUtil.h"
-#import <OpenGLES/ES2/gl.h>
+#import <OpenGLES/ES3/gl.h>
 
 @implementation OpenGLTextureUtil
 - (GLuint)setupTexture:(NSString *)fileName {

@@ -1,20 +1,21 @@
-attribute vec3 position;
-attribute vec3 normal;
+#version 300 es
+precision highp float;
+layout(location = 0) in vec3 position;
+layout(location = 1) in vec3 normal;
 
 uniform mat4 model;
+uniform mat4 modelInvertTranspose;
 uniform mat4 view;
 uniform mat4 projection;
 
-varying lowp vec3 normalCoord;
-varying lowp vec3 fragPos; //物体位置。
+out vec3 normalCoord; //法线坐标
+out vec3 fragPos; //物体位置。
 void main()
 {
     vec4 vPos = vec4(position,1.0);
-    vPos =  projection * view * model * vPos;
+    gl_Position =  projection * view * model * vPos;
     
-    normalCoord = normal;
-    fragPos = vec3(model * vec4(position, 1.0));
-    //图像翻转
-    gl_Position = vPos;
+    normalCoord = mat3(modelInvertTranspose) * normal; //法线向量需要进行调整。
+    fragPos = vec3(model * vPos);
     
 }
