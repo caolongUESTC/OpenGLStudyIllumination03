@@ -1,35 +1,45 @@
 #version 300 es
 precision highp float;
-uniform vec3 lightPos; //光源坐标
-uniform vec3 viewPos;  //视觉坐标
-uniform vec3 objectColor;
-uniform vec3 lightColor;
+struct Material {
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+    float shininess;
+};
 
+struct Light {
+    vec3 position;
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+};
 
 in vec3 normalCoord; //法线
 in vec3 fragPos;//渲染的物体坐标
-out vec4 fragColor;
+
+uniform vec3 viewPos;  //视觉坐标
+uniform Material material;
+uniform Light light;
+
+out vec4 fragColor; //输出颜色
+
 void main()
 {
     //环境光
-    lowp float ambientStrength = 0.1;
-    lowp vec3 ambient = ambientStrength * lightColor;
+    vec3 ambient = light.ambient * material.ambient;
     
     //散射光
-    lowp float diffuseStrength = 0.5;
-    lowp vec3 norm = normalize(normalCoord);
-    lowp vec3 lightDir = normalize(lightPos - fragPos);
-    lowp float diff = max(dot(norm, lightDir), 0.0);
-    lowp vec3 diffuse = diff * diffuseStrength * lightColor;
+    vec3 norm = normalize(normalCoord);
+    vec3 lightDir = normalize(light.position - fragPos);
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = light.diffuse * (diff * material.diffuse);
     
     //镜面光
-    lowp float specularStrength = 0.5;
-    lowp vec3 viewDir = normalize(viewPos - fragPos);
-    lowp vec3 reflectDir = reflect(-lightDir, norm);
-    lowp float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32.0);
-    lowp vec3 specular = specularStrength * spec * lightColor;
+    vec3 viewDir = normalize(viewPos - fragPos);
+    vec3 reflectDir = reflect(-lightDir, norm);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+    vec3 specular = light.specular * (spec * material.specular);
 
-    lowp vec3 result = (ambient + diffuse + specular ) * objectColor;
+    vec3 result = ambient + diffuse + specular;
     fragColor = vec4(result, 1.0);
-    
 }

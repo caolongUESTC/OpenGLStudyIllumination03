@@ -22,6 +22,8 @@
 @property (nonatomic, assign) GLuint depthRenderBufferId; //深度缓冲
 
 
+@property (nonatomic, assign) GLKVector3 lightPos; //光源位置
+@property (nonatomic, assign) GLKVector3 cameraPos; //相机位置
 @property (nonatomic, strong) CADisplayLink *displayLink;
 @end
 
@@ -33,7 +35,8 @@
         self.eaglLayer = (CAEAGLLayer *)self.layer;
         [OpenGLCommonUtil setupEAGLLayer:self.eaglLayer];
         self.context = [OpenGLCommonUtil generateGL2Context];
-        
+        self.lightPos = GLKVector3Make(1.2, 1.0, 2.0);
+        self.cameraPos = GLKVector3Make(0.0, 0.0, 3.0);
     }
     return self;
 }
@@ -190,18 +193,17 @@
         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
         -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
         -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
-        
     };
        
-       //顶点着色器 vsh
-       GLuint attrBuffer;
-       glGenBuffers(1, &attrBuffer); //申请一个顶点数组。
-       glBindBuffer(GL_ARRAY_BUFFER, attrBuffer); //bind cpu<->gpu
-       glBufferData(GL_ARRAY_BUFFER, sizeof(attrArr), attrArr, GL_DYNAMIC_DRAW); //将数据发送到gpu
+    //顶点着色器 vsh
+    GLuint attrBuffer;
+    glGenBuffers(1, &attrBuffer); //申请一个顶点数组。
+    glBindBuffer(GL_ARRAY_BUFFER, attrBuffer); //bind cpu<->gpu
+    glBufferData(GL_ARRAY_BUFFER, sizeof(attrArr), attrArr, GL_DYNAMIC_DRAW); //将数据发送到gpu
        
-       //将前面传过去的数据 解释成变量。
-       GLuint position = glGetAttribLocation(self.programId, "position"); //为vsh 生成变量。
-       glVertexAttribPointer(position, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, NULL);//解释获取方式。
+    //将前面传过去的数据 解释成变量。
+    GLuint position = glGetAttribLocation(self.programId, "position"); //为vsh 生成变量。
+    glVertexAttribPointer(position, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, NULL);//解释获取方式。
        glEnableVertexAttribArray(position); //使用变量。
     
     GLuint normal = glGetAttribLocation(self.programId, "normal"); //
@@ -233,14 +235,31 @@
 
 - (void)postFshUniform {
     //片段着色器 fsh
-    GLuint lightColorLoc = glGetUniformLocation(self.programId, "lightColor");
-    glUniform3f(lightColorLoc, 1.0, 0.5, 0.3);
-    GLuint objectColorLoc = glGetUniformLocation(self.programId, "objectColor");
-    glUniform3f(objectColorLoc, 1.0, 1.0, 1.0);
-    GLuint lightPosLoc = glGetUniformLocation(self.programId, "lightPos"); //光源距离
-    glUniform3f(lightPosLoc, 12, 0, 4);
+    GLKVector3 lightColor = GLKVector3Make(2.0, 0.7, 1.3);
+    GLKVector3 diffuseColor = GLKVector3Multiply(lightColor, GLKVector3Make(0.5, 0.5, 0.5)); //散射光
+    GLKVector3 ambientColor = GLKVector3Multiply(diffuseColor, GLKVector3Make(0.2, 0.2, 0.2)); //环境光
+    //光源性质。
+    GLuint lightAmbientLoc = glGetUniformLocation(self.programId, "light.ambient");
+    glUniform3f(lightAmbientLoc, ambientColor.x, ambientColor.y, ambientColor.z);
+    GLuint lightDiffuseLoc = glGetUniformLocation(self.programId, "light.diffuse");
+    glUniform3f(lightDiffuseLoc, diffuseColor.x, diffuseColor.y, diffuseColor.z);
+    GLuint lightSpecular = glGetUniformLocation(self.programId, "light.specular");
+    glUniform3f(lightSpecular, 1.0, 1.0, 1.0);
+
+    //材质
+    GLuint materialAmbientLoc = glGetUniformLocation(self.programId, "material.ambient");
+    glUniform3f(materialAmbientLoc, 1.0, 0.5, 0.31);
+    GLuint materialDiffuseLoc = glGetUniformLocation(self.programId, "material.diffuse");
+    glUniform3f(materialDiffuseLoc, 1.0, 0.5, 0.31);
+    GLuint materialSpecularLoc = glGetUniformLocation(self.programId, "material.specular");
+    glUniform3f(materialSpecularLoc, 0.5, 0.5, 0.5);
+    GLuint materialShininess = glGetUniformLocation(self.programId, "material.shininess");
+    glUniform1f(materialShininess, 32.0);
+    
+    GLuint lightPosLoc = glGetUniformLocation(self.programId, "light.position"); //光源距离
+    glUniform3f(lightPosLoc, self.lightPos.x, self.lightPos.y, self.lightPos.z);
     GLuint viewPosLoc = glGetUniformLocation(self.programId, "viewPos"); //观察者。
-    glUniform3f(viewPosLoc, 0, 0, 10);
+    glUniform3f(viewPosLoc, self.cameraPos.x, self.cameraPos.y, self.cameraPos.z);
 }
 
 - (void)glDrawPhoto {
